@@ -7,6 +7,7 @@ import cv2
 from groq import Groq
 from decouple import config
 from fpdf import FPDF
+from utils.emptyDir import empty_dir
 
 def home(request):
     return render(request, 'home.html')
