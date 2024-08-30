@@ -74,4 +74,5 @@ def upload_file(request):
                 text_file.write(text)
             
             empty_dir(outputpath)
-                              
+            
+    return HttpResponse("SUCCESS")                              
