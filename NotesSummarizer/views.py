@@ -1,13 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import os
-from pdf2image import convert_from_path
 import easyocr
-import cv2
 from groq import Groq
 from decouple import config
 from fpdf import FPDF
 from utils.emptyDir import empty_dir
+from utils.pdfToImage import pdfToImage
 
 def home(request):
     return render(request, 'home.html')
@@ -47,5 +46,10 @@ def upload_file(request):
                 element_dir = os.path.join(outputpath, element_name + '_dir') # Dir for element
                 os.makedirs(element_dir, exist_ok=True)
                 
-                # pdf_to_image
+                # pdf to image
+                pdfToImage(path, element_dir, element_name)
+            
+            files_out = os.listdir(outputpath)
+            
+            
             
