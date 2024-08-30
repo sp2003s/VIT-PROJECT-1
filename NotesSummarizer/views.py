@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import os, shutil
+import os
 from pdf2image import convert_from_path
 import easyocr
 import cv2
@@ -22,3 +22,7 @@ def upload_file(request):
             inputpath = os.path.join(current_directory, "Dir1")
             
             file_path = os.path.join(inputpath, noteFile.name)
+            
+            empty_dir("Dir1")
+            empty_dir("Dir2")
+            
