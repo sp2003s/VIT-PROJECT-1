@@ -27,3 +27,25 @@ def upload_file(request):
             empty_dir("Dir1")
             empty_dir("Dir2")
             
+            # Save the files to specified path
+            with open(file_path, 'wb') as destination:
+                for chunk in noteFile.chunks():
+                    destination.write(chunk)
+            
+            print("current directory:", current_directory)
+            print("inputpath", inputpath)
+            print("outputpath", outputpath)
+            
+            files = os.listdir(inputpath)
+            print("Files:", files)
+            
+            # Process each PDF in the input directory
+            for element in files:
+                path = os.path.join(inputpath, element)
+                print(path)
+                element_name = os.path.splitext(element)[0] # element name in extension
+                element_dir = os.path.join(outputpath, element_name + '_dir') # Dir for element
+                os.makedirs(element_dir, exist_ok=True)
+                
+                # pdf_to_image
+            
