@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import os
 import easyocr
-from groq import Groq
 from decouple import config
 from fpdf import FPDF
 from utils.emptyDir import empty_dir
@@ -20,6 +19,7 @@ def upload_file(request):
             current_directory = os.path.dirname(__file__)
             outputpath = os.path.join(current_directory, "Dir2")
             inputpath = os.path.join(current_directory, "Dir1")
+            txt_files_path = os.path.join(current_directory, 'txtFiles')
             
             file_path = os.path.join(inputpath, noteFile.name)
             
@@ -51,5 +51,27 @@ def upload_file(request):
             
             files_out = os.listdir(outputpath)
             
+            reader = easyocr.Reader(['en'])
+            text = ""
             
+            # process each generated image directory
+            for subdir in files_out:
+                subdir_path = os.path.join(outputpath, subdir)
+                if os.path.isdir(subdir_path):
+                    images = os.listdir(subdir_path)
+                    
+                    for img in images:
+                        img_path = os.path.join(subdir_path, img)
+                        print(f"Processing image:", {img_path})
+                        
+                        output = reader.readtext(img_path)
+                        for item in output:
+                            text += item[1] + "\n"
+                            
             
+            output_text_path = os.path.join(txt_files_path, "output.txt")
+            with open(output_text_path, "w") as text_file:
+                text_file.write(text)
+            
+            empty_dir(outputpath)
+                              
