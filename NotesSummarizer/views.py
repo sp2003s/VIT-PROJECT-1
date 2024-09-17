@@ -6,6 +6,7 @@ from decouple import config
 from fpdf import FPDF
 from utils.emptyDir import empty_dir
 from utils.pdfToImage import pdfToImage
+from utils.summarizeText import summarizeText
 
 def home(request):
     return render(request, 'home.html')
@@ -72,7 +73,9 @@ def upload_file(request):
             output_text_path = os.path.join(txt_files_path, "output.txt")
             with open(output_text_path, "w") as text_file:
                 text_file.write(text)
+                
+            summary = summarizeText(text)
             
             empty_dir(outputpath)
             
-    return HttpResponse("SUCCESS")                              
+    return HttpResponse(summary)                              
