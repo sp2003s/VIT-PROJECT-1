@@ -1,0 +1,10 @@
+body{
+    background-color: rgb(242, 242, 242);
+}
+
+nav{
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.573);
+}
