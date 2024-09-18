@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(242, 242, 242);
+    background-color: rgb(208, 208, 208);
 }
 
 nav{
@@ -7,4 +7,68 @@ nav{
     text-align: center;
     background-color: white;
     box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.573);
+}
+
+form{
+    border: 2px solid black;
+    border-radius: 3px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.567);
+    flex: content;
+    flex-direction: row;
+    margin: 0 14%;
+    padding: 25px 25px;
+}
+
+.form-header-text{
+    font-size: 2em;
+    font-family: monospace;
+}
+
+form > div > input{
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 4px;
+    color: rgb(0, 0, 0);
+    padding: 2px;
+    font-size: 1.15em;
+    background-color: white;
+    cursor: pointer;
+}
+
+input::file-selector-button{
+    color: rgba(255, 0, 0, 0);
+    background: rgba(255, 0, 0, 0);
+    border: none;
+    width: 45%;
+    cursor: pointer;
+}
+
+button{
+    padding: 8px;
+    width:145px;
+    font-size: 1.07em;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: black;
+    color: white;
+    font-weight: 550;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+button:hover{
+    background-color: white;
+    color: black;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.587);
+    transform: scale(1.05);
+}
+
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 3px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.97em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

@@ -20,17 +20,31 @@
     </nav>
 
     <br><br>
+    <br><br>
 
     <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+
+        <p class = "form-header-text">Upload the PDF</p> <br>
 
         <div>
             <input type="file" name="notesFile" accept="application/pdf" required>
         </div>
         <br>
 
-        <button type="submit">Upload</button>
+        <div style ="text-align:end;">
+            <button type="submit">SUMMARIZE</button>
+        </div>
     </form>
+
+
+    <footer>
+        <div class = "d-flex justify-content-around">
+            <div>Shaurya Pratap Singh (21BIT0049)</div>
+            <div>Harsh Agrawal (21BIT0412)</div>
+            <div>Parth Nagdev (21BIT0398)</div>
+        </div>
+    </footer>
     
 </body>
 </html>
