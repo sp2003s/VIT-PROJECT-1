@@ -9,9 +9,9 @@ def summarizeText(text):
     
     summary_ids=model.generate(
         tokens["input_ids"],
-        num_beams=10,
-        min_length=200,
-        max_length=400,
+        num_beams=8,
+        min_length=100,
+        max_length=500,
         early_stopping=True
     )
     

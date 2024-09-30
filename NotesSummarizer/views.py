@@ -7,6 +7,7 @@ from fpdf import FPDF
 from utils.emptyDir import empty_dir
 from utils.pdfToImage import pdfToImage
 from utils.summarizeText import summarizeText
+# from utils.cleanText import cleanText
 
 def home(request):
     return render(request, 'home.html')
@@ -70,6 +71,7 @@ def upload_file(request):
                             text += item[1] + "\n"
                             
             
+            # text = cleanText(text)
             output_text_path = os.path.join(txt_files_path, "output.txt")
             with open(output_text_path, "w") as text_file:
                 text_file.write(text)
@@ -77,5 +79,6 @@ def upload_file(request):
             summary = summarizeText(text)
             
             empty_dir(outputpath)
+            empty_dir(inputpath)
             
     return HttpResponse(summary)                              
