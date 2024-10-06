@@ -85,4 +85,7 @@ def upload_file(request):
             empty_dir(outputpath)
             empty_dir(inputpath)
             
-    return HttpResponse(summary)                              
+    return HttpResponse(summary) 
+
+def download_file(request):
+    return render(request, 'summary.html')                             
