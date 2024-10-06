@@ -7,6 +7,7 @@ from fpdf import FPDF
 from utils.emptyDir import empty_dir
 from utils.pdfToImage import pdfToImage
 from utils.summarizeText import summarizeText
+from utils.summaryPDF import create_summary_pdf
 # from utils.cleanText import cleanText
 
 def home(request):
@@ -71,12 +72,15 @@ def upload_file(request):
                             text += item[1] + "\n"
                             
             
-            # text = cleanText(text)
+            # text = cleanText(text)                
+            summary_text_path = os.path.join(txt_files_path, "output.txt")
+            summary = summarizeText(text)
+            
             output_text_path = os.path.join(txt_files_path, "output.txt")
             with open(output_text_path, "w") as text_file:
-                text_file.write(text)
-                
-            summary = summarizeText(text)
+                text_file.write(summary)
+            
+            create_summary_pdf(summary_text_path, os.path.join(txt_files_path, "Summary.pdf"))
             
             empty_dir(outputpath)
             empty_dir(inputpath)

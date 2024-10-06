@@ -15,5 +15,5 @@ def summarizeText(text):
         early_stopping=True
     )
     
-    summary = tokenizer.decode(summary_ids[0], skip_special_token=True)
+    summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
     return summary
