@@ -85,7 +85,28 @@ def upload_file(request):
             empty_dir(outputpath)
             empty_dir(inputpath)
             
-    return HttpResponse(summary) 
+    return render(request, "summary.html") 
 
 def download_file(request):
-    return render(request, 'summary.html')                             
+    
+    current_dir = os.path.dirname(__file__)
+    pdf_dir = os.path.join(current_dir, "txtFiles")
+    
+    pdf_file = None
+    files_in_dir = os.listdir(pdf_dir)
+    
+    for file_name in files_in_dir:
+        if file_name.lower().endswith(".pdf"):
+            pdf_file = file_name
+            break
+        
+    if pdf_file:
+        pdf_file_path = os.path.join(pdf_dir, pdf_file)
+        
+        with open(pdf_file_path, 'rb') as pdf_file:
+            response = HttpResponse(pdf_file.read(), content = 'application/pdf')
+            
+        response['Content-Disposition'] = f'attachment; filename= "{os.path.basename(pdf_file_path)}"'       
+        return response
+    else:
+        return HttpResponse("No PDF Found", status=404)                           
