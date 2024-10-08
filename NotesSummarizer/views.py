@@ -104,7 +104,7 @@ def download_file(request):
         pdf_file_path = os.path.join(pdf_dir, pdf_file)
         
         with open(pdf_file_path, 'rb') as pdf_file:
-            response = HttpResponse(pdf_file.read(), content = 'application/pdf')
+            response = HttpResponse(pdf_file.read(), content_type = 'application/pdf')
             
         response['Content-Disposition'] = f'attachment; filename= "{os.path.basename(pdf_file_path)}"'       
         return response
