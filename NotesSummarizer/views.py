@@ -8,6 +8,9 @@ from utils.emptyDir import empty_dir
 from utils.pdfToImage import pdfToImage
 from utils.summarizeText import summarizeText
 from utils.summaryPDF import create_summary_pdf
+from utils.Abstractive_Summarization import abstractive_text_summarization
+from utils.Extarctive_Summarization import extractive_text_summarization
+from utils.llmSummarization import llm_summary
 # from utils.cleanText import cleanText
 
 def home(request):
@@ -25,9 +28,10 @@ def upload_file(request):
             txt_files_path = os.path.join(current_directory, 'txtFiles')
             
             file_path = os.path.join(inputpath, noteFile.name)
-            
+            num_pages = 0
             empty_dir("Dir1")
             empty_dir("Dir2")
+            empty_dir("txtFiles")
             
             # Save the files to specified path
             with open(file_path, 'wb') as destination:
@@ -66,15 +70,21 @@ def upload_file(request):
                     for img in images:
                         img_path = os.path.join(subdir_path, img)
                         print(f"Processing image:", {img_path})
+                        num_pages += 1
                         
                         output = reader.readtext(img_path)
                         for item in output:
                             text += item[1] + "\n"
                             
             
-            # text = cleanText(text)                
+            # text = cleanText(text)  
+            print(text)       
             summary_text_path = os.path.join(txt_files_path, "output.txt")
-            summary = summarizeText(text)
+            # summary = llm_summary(text)
+            # summary = extractive_text_summarization(text, num_pages*5)
+            # summary = abstractive_text_summarization(text, num_pages)
+            # print(num_pages)
+            summary = summarizeText(text, num_pages)
             
             output_text_path = os.path.join(txt_files_path, "output.txt")
             with open(output_text_path, "w") as text_file:

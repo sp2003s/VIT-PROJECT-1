@@ -22,42 +22,24 @@
     <div class="container">
         <div class="app-description">
             <h2>Summarize Text</h2>
-            <p>Upload your PDF notes and get a concise summary. Save time and boost your productivity!</p>
+            <p>Upload your PDF notes and get a concise summary in seconds. Save time and boost your productivity!</p>
         </div>
 
-        <div class="toggle-container">
-            <button id="toggleButton" class="toggle-button">Switch to Form 2</button>
-        </div>
+        <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-        <div id="form1" class="form-container">
-            <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <p class="form-header-text">Upload the PDF (Form 1)</p>
-                <div class="file-input-wrapper">
-                    <input type="file" name="notesFile1" id="notesFile1" accept="application/pdf" required>
-                    <label for="notesFile1">Choose a file</label>
-                    <span id="file-name1">No file chosen</span>
-                </div>
-                <div class="submit-wrapper">
-                    <button type="submit">SUMMARIZE</button>
-                </div>
-            </form>
-        </div>
+            <p class="form-header-text">Upload the PDF</p>
 
-        <div id="form2" class="form-container" style="display: none;">
-            <form action="{% url 'upload_file' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <p class="form-header-text">Upload the PDF (Form 2)</p>
-                <div class="file-input-wrapper">
-                    <input type="file" name="notesFile2" id="notesFile2" accept="application/pdf" required>
-                    <label for="notesFile2">Choose a file</label>
-                    <span id="file-name2">No file chosen</span>
-                </div>
-                <div class="submit-wrapper">
-                    <button type="submit">SUMMARIZE</button>
-                </div>
-            </form>
-        </div>
+            <div class="file-input-wrapper">
+                <input type="file" name="notesFile" id="notesFile" accept="application/pdf" required>
+                <label for="notesFile">Choose a file</label>
+                <span id="file-name">No file chosen</span>
+            </div>
+
+            <div class="submit-wrapper">
+                <button type="submit">SUMMARIZE</button>
+            </div>
+        </form>
     </div>
 
     <footer>
@@ -69,41 +51,10 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggleButton = document.getElementById('toggleButton');
-            const form1 = document.getElementById('form1');
-            const form2 = document.getElementById('form2');
-        
-            toggleButton.addEventListener('click', function() {
-                if (form1.style.display === 'none') {
-                    form1.style.display = 'block';
-                    form2.style.display = 'none';
-                    toggleButton.textContent = 'Switch to Form 2';
-                } else {
-                    form1.style.display = 'none';
-                    form2.style.display = 'block';
-                    toggleButton.textContent = 'Switch to Form 1';
-                }
-            });
-        
-            // File input handling for both forms
-            function handleFileInput(inputId, fileNameId) {
-                const input = document.getElementById(inputId);
-                const fileName = document.getElementById(fileNameId);
-        
-                input.addEventListener('change', function(e) {
-                    if (e.target.files.length > 0) {
-                        fileName.textContent = e.target.files[0].name;
-                    } else {
-                        fileName.textContent = 'No file chosen';
-                    }
-                });
-            }
-        
-            handleFileInput('notesFile1', 'file-name1');
-            handleFileInput('notesFile2', 'file-name2');
+        document.getElementById('notesFile').addEventListener('change', function(e) {
+            var fileName = e.target.files[0].name;
+            document.getElementById('file-name').textContent = fileName;
         });
     </script>
-
 </body>
 </html>

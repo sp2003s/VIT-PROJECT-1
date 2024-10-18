@@ -1,14 +1,15 @@
 # pip install spacy
 # !python -m spacy download en_core_web_sm
 
-import spacy
-from spacy.lang.en.stop_words import STOP_WORDS
-from string import punctuation
-from collections import Counter
-import pandas as pd
-from heapq import nlargest
-
 def extractive_text_summarization(text, num_of_sentences):
+    
+    import spacy
+    from spacy.lang.en.stop_words import STOP_WORDS
+    from string import punctuation
+    from collections import Counter
+    import pandas as pd
+    from heapq import nlargest
+
     nlp = spacy.load('en_core_web_sm')
     doc = nlp(text)
     
@@ -55,6 +56,7 @@ def extractive_text_summarization(text, num_of_sentences):
     
     # Summarized text
     summarized_text = ' '.join(n)
+    summarized_text = '\n'.join(n)
     
     return summarized_text
             
