@@ -80,11 +80,13 @@ def upload_file(request):
             # text = cleanText(text)  
             print(text)       
             summary_text_path = os.path.join(txt_files_path, "output.txt")
-            # summary = llm_summary(text)
             # summary = extractive_text_summarization(text, num_pages*5)
             # summary = abstractive_text_summarization(text, num_pages)
             # print(num_pages)
-            summary = summarizeText(text, num_pages)
+            summary1 = summarizeText(text, num_pages)
+            summary2 = llm_summary(text)
+            
+            summary = summary1 + "\n\n" + summary2
             
             output_text_path = os.path.join(txt_files_path, "output.txt")
             with open(output_text_path, "w") as text_file:
