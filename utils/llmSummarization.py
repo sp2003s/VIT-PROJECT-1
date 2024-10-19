@@ -9,7 +9,6 @@ def llm_summary(text):
         api_key = config('API_KEY')
     )
 
-    # Create the chat completion request to summarize the text
     chat_completion = client.chat.completions.create(
         messages=[
             {
@@ -22,4 +21,3 @@ def llm_summary(text):
 
     return chat_completion.choices[0].message.content
     
-                
