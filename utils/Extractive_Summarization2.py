@@ -8,6 +8,9 @@ def extractive_summ(text):
     import spacy
     from spacy.lang.en.stop_words import STOP_WORDS
     from string import punctuation
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    import pandas as pd
+    from heapq import nlargest
 
     nlp = spacy.load('en_core_web_sm')
 
@@ -55,11 +58,6 @@ def extractive_summ(text):
     # Get sentences from the merged text
     sentences = get_sentences(text)
     print(sentences)
-    
-    
-    from sklearn.feature_extraction.text import TfidfVectorizer
-    import pandas as pd
-    from heapq import nlargest
 
     # Function to score sentences using TF-IDF
     def score_sentences(sentences):

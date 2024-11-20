@@ -10,6 +10,7 @@ from utils.summarizeText import summarizeText
 from utils.summaryPDF import create_summary_pdf
 from utils.Abstractive_Summarization import abstractive_text_summarization
 from utils.Extarctive_Summarization import extractive_text_summarization
+from utils.Extractive_Summarization2 import extractive_summ
 from utils.llmSummarization import llm_summary
 # from utils.cleanText import cleanText
 
@@ -80,10 +81,10 @@ def upload_file(request):
             # text = cleanText(text)  
             print(text)       
             summary_text_path = os.path.join(txt_files_path, "output.txt")
-            # summary = extractive_text_summarization(text, num_pages*5)
+            summary1 = extractive_summ(text)
             # summary = abstractive_text_summarization(text, num_pages)
             # print(num_pages)
-            summary1 = summarizeText(text, num_pages)
+            ### summary1 = summarizeText(text, num_pages)
             summary2 = llm_summary(text)
             
             summary = summary1 + "\n\n" + summary2
